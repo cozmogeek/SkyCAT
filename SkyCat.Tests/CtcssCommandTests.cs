@@ -127,8 +127,16 @@ namespace SkyCat.Tests
     //----------------------------------------------------------------------------------------------
     //                              every rig that defines the tone commands
     //----------------------------------------------------------------------------------------------
-    // tones present in every rig's table (Icom BCD, Yaesu/Kenwood index tables all include these)
-    private static readonly string[] StandardTones = { "670", "744", "1413" };
+    // the 38 tones, in tenths of Hz, that every radio with a CAT tone command can produce. this is
+    // the set SkyRoof offers: the TS-2000 has neither 69.3 nor any of the 11 extended tones
+    // (159.8 .. 254.1), and the FT-847 has no extended tones either
+    private static readonly string[] StandardTones =
+    {
+      "670", "719", "744", "770", "797", "825", "854", "885", "915", "948",
+      "974", "1000", "1035", "1072", "1109", "1148", "1188", "1230", "1273", "1318",
+      "1365", "1413", "1462", "1514", "1567", "1622", "1679", "1738", "1799", "1862",
+      "1928", "2035", "2107", "2181", "2257", "2336", "2418", "2503"
+    };
 
     public static IEnumerable<object[]> RigFiles()
     {
@@ -158,6 +166,11 @@ namespace SkyCat.Tests
         var message = group[CatCommand.write_ctcss_tone].Messages.First(m => m.CommandParam != null);
         foreach (var tone in StandardTones)
           Assert.NotEmpty(BuildFrame(message, tone));
+
+        // and it must offer nothing beyond them, so that every rig behaves the same way
+        var values = message.CommandParam!.Values;
+        if (values != null)
+          Assert.Equal(StandardTones.OrderBy(t => t), values.Keys.OrderBy(t => t));
       }
     }
   }
