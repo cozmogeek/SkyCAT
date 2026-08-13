@@ -11,6 +11,7 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "16", "5A", "01", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "SAT mode ON" },
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         { "command": ["FE", "FE", "7C", "E0", "0F", "00", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Split off" }
       ],
       "restriction": "when_setting_up"
@@ -19,6 +20,7 @@
     "read_rx_frequency":  {
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         {
           "command": ["FE", "FE", "7C", "E0", "03", "FD"],
           "reply": ["FE", "FE", "E0", "7C",  "03", null, null, null, null, null, "FD"],
@@ -41,6 +43,7 @@
     "read_rx_mode":  {
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         {
           "command": ["FE", "FE", "7C", "E0", "04", "FD"],
           "reply_param": {
@@ -77,6 +80,7 @@
     "write_rx_frequency":  {
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         {
           "command": ["FE", "FE", "7C", "E0", "05", null, null, null, null, null, "FD"],
           "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"],
@@ -208,6 +212,30 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "select Sub band (TX in sat mode)" },
+        { "command": ["FE", "FE", "7C", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "select Sub band" },
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "select Sub band" },
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   },
 
@@ -216,6 +244,7 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "16", "5A", "00", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "SAT mode off" },
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         { "command": ["FE", "FE", "7C", "E0", "0F", "01", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Split ON" },
         { "command": ["FE", "FE", "7C", "E0", "16", "59", "00", "FD"], "reply": [ "FE", "FE", "E0", "7C", "FB", "FD"], "comment": "dual watch off" }
       ],
@@ -342,6 +371,27 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   },
 
@@ -350,6 +400,7 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "16", "5A", "00", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "SAT mode off" },
         { "command": ["FE", "FE", "7C", "E0", "07", "D0", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Select Main band" },
+        { "command": ["FE", "FE", "7C", "E0", "1A", "05", "00", "19", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         { "command": ["FE", "FE", "7C", "E0", "0F", "00", "FD"], "reply": [ "FE", "FE", "E0", "7C",  "FB", "FD"], "comment": "Split off" },
         { "command": ["FE", "FE", "7C", "E0", "16", "59", "00", "FD"], "reply": [ "FE", "FE", "E0", "7C", "FB", "FD"], "comment": "dual watch off" }
       ],
@@ -474,6 +525,27 @@
       "messages": [
         { "command": ["FE", "FE", "7C", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "7C",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "7C", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "7C", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
-  }  
+  }
 }

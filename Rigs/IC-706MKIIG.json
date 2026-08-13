@@ -105,7 +105,21 @@
 
     "write_ptt_off": null,
 
-    "write_ptt_on": null
+    "write_ptt_on": null,
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "58", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "58", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "58", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "58", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
+    }
   },
 
   "simplex": {
@@ -180,6 +194,20 @@
 
     "write_ptt_off": null,
 
-    "write_ptt_on": null
+    "write_ptt_on": null,
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "58", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "58", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "58", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "58", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
+    }
   }
 }

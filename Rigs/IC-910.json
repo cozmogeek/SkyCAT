@@ -151,6 +151,30 @@
       "messages": [
         { "command": ["FE", "FE", "60", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "60",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "select Sub band (TX in sat mode)" },
+        { "command": ["FE", "FE", "60", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "select Sub band" },
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "07", "D1", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "select Sub band" },
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   },
 
@@ -285,6 +309,27 @@
       "messages": [
         { "command": ["FE", "FE", "60", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "60",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   },
 
@@ -417,6 +462,27 @@
       "messages": [
         { "command": ["FE", "FE", "60", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "60",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "60", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "60", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
-  }  
+  }
 }

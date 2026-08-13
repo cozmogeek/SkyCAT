@@ -26,6 +26,9 @@ namespace SkyCat
     write_tx_mode,
     write_ptt_off,
     write_ptt_on,
+    write_ctcss_tone,
+    enable_ctcss,
+    disable_ctcss,
   }
 
   public enum CatRestriction

@@ -35,6 +35,11 @@ namespace skycatd
         "T" when args.Length == 2 && (args[1] == "0") => CmdT0("OFF"),
         "T" when args.Length == 2 && (args[1] == "1") => CmdT1("ON"),
 
+        // CTCSS transmit encode tone (tone value in tenths of Hz, e.g. C 670 = 67.0 Hz)
+        "C" when args.Length == 2 && int.TryParse(args[1], out var toneTenthsHz) => CmdC(toneTenthsHz),
+        "U" when args.Length == 3 && args[1] == "TONE" && args[2] == "1" => SendCommandIfAvailable(CatCommand.enable_ctcss),
+        "U" when args.Length == 3 && args[1] == "TONE" && args[2] == "0" => SendCommandIfAvailable(CatCommand.disable_ctcss),
+
         // setup
         "S" when args.Length == 3 && args[1] == "0" => Setup(OperatingMode.Simplex),
         "S" when args.Length == 3 && args[1] == "1" && args[2] != "Sub" => Setup(OperatingMode.Split),
@@ -68,6 +73,7 @@ namespace skycatd
     private string CmdXStr0(string str, int zero) => SendCommandIfAvailable(CatCommand.write_tx_mode, str);
     private string CmdT0(string value) => SendCommandIfAvailable(CatCommand.write_ptt_off, value);
     private string CmdT1(string value) => SendCommandIfAvailable(CatCommand.write_ptt_on, value);
+    private string CmdC(int toneTenthsHz) => SendCommandIfAvailable(CatCommand.write_ctcss_tone, toneTenthsHz.ToString());
 
     private string Setup(OperatingMode mode)
     {

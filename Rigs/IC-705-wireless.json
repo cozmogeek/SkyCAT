@@ -1,5 +1,5 @@
 {
-  "id": 3085,
+  "id": 30850,
   "echo": true,
   "default_baud_rate": 19200,
   "cross_band_split": false,
@@ -10,6 +10,7 @@
     "setup": {
       "messages": [
         { "command": ["FE", "FE", "A4", "E0", "1A", "05", "01", "31", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "transceive off" },
+        { "command": ["FE", "FE", "A4", "E0", "1A", "05", "00", "49", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         { "command": ["FE", "FE", "A4", "E0", "0F", "01", "FD"], "reply": [ "FE", "FE", "E0", "A4", "FB", "FD"], "comment": "split on" }
       ],
       "restriction": "when_setting_up"
@@ -145,6 +146,27 @@
       "messages": [
         { "command": ["FE", "FE", "A4", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "A4",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   },
 
@@ -152,6 +174,7 @@
     "setup": {
       "messages": [
         { "command": ["FE", "FE", "A4", "E0", "1A", "05", "01", "31", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "transceive off" },
+        { "command": ["FE", "FE", "A4", "E0", "1A", "05", "00", "49", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "ignore_error": true, "comment": "Auto Repeater OFF (keeps CTCSS on across Doppler; USA/Korea only, NAKed elsewhere)" },
         { "command": ["FE", "FE", "A4", "E0", "0F", "00", "FD"], "reply": [ "FE", "FE", "E0", "A4", "FB", "FD"], "comment": "split off" }
       ],
       "restriction": "when_setting_up"
@@ -295,6 +318,27 @@
       "messages": [
         { "command": ["FE", "FE", "A4", "E0", "1C", "00", "01", "FD"], "reply": ["FE", "FE", "E0", "A4",  "FB", "FD"] }
       ]
+    },
+
+    "write_ctcss_tone": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "1B", "00", null, null, null, "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "command_param": {"format": "BCD_BE"}, "comment": "set repeater (encode) tone, BCD tenths of Hz" }
+      ],
+      "restriction": "none"
+    },
+
+    "enable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "16", "42", "01", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "repeater tone (CTCSS encode) ON" }
+      ],
+      "restriction": "none"
+    },
+
+    "disable_ctcss": {
+      "messages": [
+        { "command": ["FE", "FE", "A4", "E0", "16", "42", "00", "FD"], "reply": ["FE", "FE", "E0", "A4", "FB", "FD"], "comment": "repeater tone (CTCSS encode) OFF" }
+      ],
+      "restriction": "none"
     }
   }
 }
