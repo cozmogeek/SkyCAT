@@ -5,7 +5,7 @@ nav_order: 4
 
 # SkyCAT Commandset File Format
 
-_Updated: 2025-09-05_.
+_Updated: 2026-08-12_.
 
 [SkyCAT](skycat.md) stores the CAT commands of each supported radio in a separate file of type **.json**. The file name is the model name of the radio, for example, _"IC-9700.json"_ contains the commands of ICOM IC-9700. Support of new radio models may be added to SkyCAT by creating new command set files.
 
@@ -72,7 +72,10 @@ The values of the **duplex, split** and **simplex** fields are objects that have
     "write_rx_mode": {... },
     "write_tx_mode": {... },
     "write_ptt_off": {... },
-    "write_ptt_on": {... }
+    "write_ptt_on": {... },
+    "write_ctcss_tone": {... },
+    "enable_ctcss": {... },
+    "disable_ctcss": {... }
 }
 ```
 
@@ -83,6 +86,10 @@ Each field in the object describes the corresponding command. If the command is 
 ```
 
 However, some minimum set of commands should be present for the given operating mode to be useful. The software verifies that at least one command is not null.
+
+The last three commands are optional and control the **transmit CTCSS** (sub-audible / PL tone)
+encoder, used to access FM-repeater satellites such as SO-50. They act on the transmitter only,
+never on the receiver.
 
 ## Command Format
 

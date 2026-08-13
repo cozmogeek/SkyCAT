@@ -101,7 +101,11 @@ skycatd understands the following TCP commands, followed by the NewLine characte
 | read_ptt           | t              |
 | set_ptt_on         | T 1            |
 | set_ptt_off        | T 0            |
+| write_ctcss_tone   | C {tone}       |
+| enable_ctcss       | U TONE 1       |
+| disable_ctcss      | U TONE 0       |
 
-where **frequency** is the frequency in Hertz, and **mode** is a mode name, e.g., CW.
+where **frequency** is the frequency in Hertz, **mode** is a mode name, e.g., CW, and **tone** is
+the CTCSS sub-audible (PL) tone in tenths of Hz, e.g. `C 670` = 67.0 Hz.
 
 For compatibility with rigctld.exe, the '**U SATMODE 1**', '**S 1 VFOB**' and '**S 0 VFOB**' commands are recognized as aliases of the Duplex, Split and Simplex setup commands respectively.
